@@ -1,11 +1,13 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
 const URL = 'https://teachablemachine.withgoogle.com/models/Te0UCkuiK/';
+const LETTERS = ['Aa', 'Bb', 'Cc'];
 
 let model;
 let webcam;
 let labelContainer;
 let maxPredictions;
+let randomLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
 
 // run the webcam image through the image model
 async function predict() {
@@ -15,6 +17,12 @@ async function predict() {
         for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction = `${prediction[i].className}: ${prediction[i].probability.toFixed(2)}`;
                 labelContainer.childNodes[i].innerHTML = classPrediction;
+
+                if (prediction[i].className === randomLetter && prediction[i].probability > 0.95) {
+                        alert(`Correct: ${randomLetter}`);
+                        randomLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+                        document.getElementById('letter').textContent = randomLetter;
+                }
         }
 }
 
@@ -28,6 +36,7 @@ async function loop() {
 async function init() {
         const modelURL = `${URL}model.json`;
         const metadataURL = `${URL}metadata.json`;
+        document.getElementById('letter').textContent = randomLetter;
 
         // load the model and metadata
         // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
