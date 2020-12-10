@@ -1,0 +1,25 @@
+{
+  "name": "see-deez-handz-vanilla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack ./src/script.js -o ./public/bundle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcbest/see-deez-handz-vanilla-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gcbest/see-deez-handz-vanilla-js/issues"
+  },
+  "homepage": "https://github.com/gcbest/see-deez-handz-vanilla-js#readme",
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
