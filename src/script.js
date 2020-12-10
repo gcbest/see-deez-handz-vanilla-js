@@ -1,7 +1,34 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
 const URL = 'https://teachablemachine.withgoogle.com/models/Te0UCkuiK/';
-const LETTERS = ['Aa', 'Bb', 'Cc'];
+const LETTERS = [
+        'Aa',
+        'Bb',
+        'Cc',
+        'Dd',
+        'Ee',
+        'Ff',
+        'Gg',
+        'Hh',
+        'Ii',
+        'Jj',
+        'Kk',
+        'Ll',
+        'Mm',
+        'Nn',
+        'Oo',
+        'Pp',
+        'Qq',
+        'Rr',
+        'Ss',
+        'Tt',
+        'Uu',
+        'Vv',
+        'Ww',
+        'Xx',
+        'Yy',
+        'Zz',
+];
 // const WORDS = ['house', 'dog', 'car'];
 
 let model;
@@ -24,12 +51,14 @@ function removeAllChildNodes(parent) {
         }
 }
 
-letterBtn.addEventListener('click', function() {
-        randomLetter = getRandomLetter();
-        document.getElementById('letter').textContent = randomLetter;
-        removeAllChildNodes(webcamContainer);
-        init();
-});
+if (letterBtn) {
+        letterBtn.addEventListener('click', function() {
+                randomLetter = getRandomLetter();
+                document.getElementById('letter').textContent = randomLetter;
+                removeAllChildNodes(webcamContainer);
+                init();
+        });
+}
 
 // TODO: get init() working with word btn
 // wordBtn.addEventListener('click', function() {
@@ -91,3 +120,5 @@ async function init() {
                 labelContainer.appendChild(document.createElement('div'));
         }
 }
+
+exports.LETTERS = LETTERS;
