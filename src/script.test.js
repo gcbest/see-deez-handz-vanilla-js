@@ -1,5 +1,5 @@
-const { expect } = require('@jest/globals');
+const { LETTERS } = require('./script');
 
 test('has letters', () => {
-        expect(1).toBe(1);
+        expect(LETTERS.length).toBe(26);
 });
