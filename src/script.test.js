@@ -1,5 +1,5 @@
 const { LETTERS } = require('./script');
 
-test('has letters', () => {
+test('has all letters of alphabet', () => {
         expect(LETTERS.length).toBe(26);
 });

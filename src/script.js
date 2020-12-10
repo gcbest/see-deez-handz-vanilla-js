@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
-const URL = 'https://teachablemachine.withgoogle.com/models/Te0UCkuiK/';
+// const URL = 'https://teachablemachine.withgoogle.com/models/Te0UCkuiK/'; // a, b, c
+const URL = 'https://teachablemachine.withgoogle.com/models/uClbGgAxr/'; // full alphabet, blank wall
 const LETTERS = [
         'Aa',
         'Bb',
@@ -37,11 +38,18 @@ let labelContainer;
 let maxPredictions;
 let randomLetter = '';
 // let randomWord = '';
+let index = 0;
 
-const getRandomLetter = () => LETTERS[Math.floor(Math.random() * LETTERS.length)];
+const setRandomIndex = () => (index = Math.floor(Math.random() * LETTERS.length));
+const getRandomLetter = () => {
+        setRandomIndex();
+        return LETTERS[index];
+};
 // const getRandomWord = () => WORDS[Math.floor(Math.random() * WORDS.length)];
 
 const letterBtn = document.getElementById('letter-btn');
+const nextLetterBtn = document.getElementById('next-letter-btn');
+const randomLetterBtn = document.getElementById('random-letter-btn');
 // const wordBtn = document.getElementById('word-btn');
 const webcamContainer = document.getElementById('webcam-container');
 
@@ -51,12 +59,29 @@ function removeAllChildNodes(parent) {
         }
 }
 
-if (letterBtn) {
+if (letterBtn && nextLetterBtn && randomLetterBtn) {
         letterBtn.addEventListener('click', function() {
-                randomLetter = getRandomLetter();
+                // randomLetter = getRandomLetter();
+                randomLetter = LETTERS[index];
                 document.getElementById('letter').textContent = randomLetter;
                 removeAllChildNodes(webcamContainer);
                 init();
+        });
+
+        nextLetterBtn.addEventListener('click', function() {
+                if (index < LETTERS.length) {
+                        randomLetter = LETTERS[++index];
+                } else {
+                        index = 0;
+                        // eslint-disable-next-line prefer-destructuring
+                        randomLetter = LETTERS[index];
+                }
+                document.getElementById('letter').textContent = randomLetter;
+        });
+
+        randomLetterBtn.addEventListener('click', function() {
+                randomLetter = getRandomLetter();
+                document.getElementById('letter').textContent = randomLetter;
         });
 }
 
@@ -76,11 +101,18 @@ async function predict() {
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction = `${prediction[i].className}: ${prediction[i].probability.toFixed(2)}`;
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+                // labelContainer.childNodes[i].innerHTML = classPrediction;
 
-                if (prediction[i].className === randomLetter && prediction[i].probability > 0.95) {
+                if (prediction[i].className === randomLetter && prediction[i].probability > 0.75) {
                         alert(`Correct: ${randomLetter}`);
-                        randomLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+                        // randomLetter = getRandomLetter();
+                        if (index < LETTERS.length) {
+                                randomLetter = LETTERS[++index];
+                        } else {
+                                index = 0;
+                                // eslint-disable-next-line prefer-destructuring
+                                randomLetter = LETTERS[index];
+                        }
                         document.getElementById('letter').textContent = randomLetter;
                 }
         }
@@ -117,7 +149,7 @@ async function init() {
         labelContainer = document.getElementById('label-container');
         for (let i = 0; i < maxPredictions; i++) {
                 // and class labels
-                labelContainer.appendChild(document.createElement('div'));
+                // labelContainer.appendChild(document.createElement('div'));
         }
 }
 
