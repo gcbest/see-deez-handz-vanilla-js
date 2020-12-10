@@ -2,20 +2,20 @@
 /* eslint-disable no-undef */
 const URL = 'https://teachablemachine.withgoogle.com/models/Te0UCkuiK/';
 const LETTERS = ['Aa', 'Bb', 'Cc'];
-const WORDS = ['house', 'dog', 'car'];
+// const WORDS = ['house', 'dog', 'car'];
 
 let model;
 let webcam;
 let labelContainer;
 let maxPredictions;
 let randomLetter = '';
-let randomWord = '';
+// let randomWord = '';
 
 const getRandomLetter = () => LETTERS[Math.floor(Math.random() * LETTERS.length)];
-const getRandomWord = () => WORDS[Math.floor(Math.random() * WORDS.length)];
+// const getRandomWord = () => WORDS[Math.floor(Math.random() * WORDS.length)];
 
 const letterBtn = document.getElementById('letter-btn');
-const wordBtn = document.getElementById('word-btn');
+// const wordBtn = document.getElementById('word-btn');
 const webcamContainer = document.getElementById('webcam-container');
 
 function removeAllChildNodes(parent) {
@@ -32,13 +32,13 @@ letterBtn.addEventListener('click', function() {
 });
 
 // TODO: get init() working with word btn
-wordBtn.addEventListener('click', function() {
-        randomWord = getRandomWord();
-        console.log(randomWord);
-        document.getElementById('letter').textContent = randomWord;
-        removeAllChildNodes(webcamContainer);
-        init();
-});
+// wordBtn.addEventListener('click', function() {
+//         randomWord = getRandomWord();
+//         console.log(randomWord);
+//         document.getElementById('letter').textContent = randomWord;
+//         removeAllChildNodes(webcamContainer);
+//         init();
+// });
 
 // run the webcam image through the image model
 async function predict() {
